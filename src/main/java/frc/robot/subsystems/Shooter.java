@@ -41,21 +41,25 @@ public class Shooter extends SubsystemBase {
     }
 
     public void periodic(){
+        //Output the velocity of the shooter motors to the dashboard
         SmartDashboard.putNumber("Top Shooter Motor Velocity:",topVelo);
         SmartDashboard.putNumber("Bottom Shooter Motor Velocity:",bottomVelo);
     }
 
     public void shootSpeaker(int Velo){
+        //set the velocity of the motor based on input value
         m_BottomShooterPIDController.setReference(Velo,CANSparkBase.ControlType.kVelocity);
         m_TopShooterPidController.setReference(Velo,CANSparkBase.ControlType.kVelocity);
     }
 
     public void shootAmp(int topVelo, int bottomVelo){
+        //set the velocity of the motor based on input value
         m_BottomShooterPIDController.setReference(bottomVelo,CANSparkBase.ControlType.kVelocity);
         m_TopShooterPidController.setReference(topVelo,CANSparkBase.ControlType.kVelocity);
     }
 
     public void stop(){
+        //stop the motor
         m_BottomShooterPIDController.setReference(0,CANSparkBase.ControlType.kVelocity);
         m_TopShooterPidController.setReference(0,CANSparkBase.ControlType.kVelocity);
     }

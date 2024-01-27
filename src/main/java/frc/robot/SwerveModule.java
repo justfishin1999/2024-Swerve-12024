@@ -3,7 +3,7 @@ package frc.robot;
 import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VelocityVoltage;
-import com.ctre.phoenix6.hardware.CANcoder;
+//import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -13,6 +13,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import frc.lib.math.Conversions;
+import frc.lib.util.COTSTalonFXSwerveConstants;
 import frc.lib.util.CTREModuleState;
 import frc.lib.util.SwerveModuleConstants;
 
@@ -44,6 +45,22 @@ public class SwerveModule {
         /* Angle Motor Config */
         mAngleMotor = new TalonFX(moduleConstants.angleMotorID);
         mAngleMotor.getConfigurator().apply(Robot.ctreConfigs.swerveAngleFXConfig);
+        if(moduleNumber==0){
+            mAngleMotor.setInverted(moduleConstants.isAngleMotorInverted);
+        }
+        else if(moduleNumber==1){
+            mAngleMotor.setInverted(moduleConstants.isAngleMotorInverted);
+        }
+        else if(moduleNumber==2){
+            mAngleMotor.setInverted(moduleConstants.isAngleMotorInverted);
+        }
+        else if(moduleNumber==3){
+            mAngleMotor.setInverted(moduleConstants.isAngleMotorInverted);
+        }
+        else{
+            System.out.println("Module number is not between 0-3");
+        }
+
         resetToAbsolute();
 
         /* Drive Motor Config */
@@ -72,50 +89,14 @@ public class SwerveModule {
     }
 
     public Rotation2d getCANcoder(){
-        return Rotation2d.fromRotations(mAngleEncoder.getAbsolutePosition());
-    }
-
-    public double makePositiveDegrees(double anAngle ){
-        double degrees = anAngle;
-        degrees = degrees % 360;
-        if (degrees < 0.0){
-            degrees = degrees + 360;
-        }
-        return degrees;
-    }
-
-    public double makePositiveDegrees(Rotation2d anAngle){
-        return makePositiveDegrees(anAngle.getDegrees());
-    }
-
-    public Rotation2d optimizeTurn(Rotation2d oldAngle, Rotation2d newAngle){
-        double steerAngle = makePositiveDegrees(newAngle);
-        steerAngle %= (360);
-        if (steerAngle < 0.0) {
-            steerAngle += 360;
-        }
-
-        double difference = steerAngle - oldAngle.getDegrees();
-        // Change the target angle so the difference is in the range [-360, 360) instead of [0, 360)
-        if (difference >= 360) {
-            steerAngle -= 360;
-        } else if (difference < -360) {
-            steerAngle += 360;
-        }
-        difference = steerAngle - oldAngle.getDegrees(); // Recalculate difference
-
-        // If the difference is greater than 90 deg or less than -90 deg the drive can be inverted so the total
-        // movement of the module is less than 90 deg
-        if (difference >90 || difference < -90) {
-            // Only need to add 180 deg here because the target angle will be put back into the range [0, 2pi)
-            steerAngle += 180;
-        }
-
-        return Rotation2d.fromDegrees(makePositiveDegrees(steerAngle));
+        double absoluteAngle = mAngleEncoder.getAbsolutePosition();
+        absoluteAngle = absoluteAngle * 2 * Math.PI;
+        return Rotation2d.fromRadians(absoluteAngle);
     }
 
     public void resetToAbsolute(){
         double absolutePosition = getCANcoder().getRotations() - angleOffset.getRotations();
+        //double absolutePosition = Conversions.degreesToFalcon(getCANcoder().getDegrees() - angleOffset.getDegrees(),COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L2);
         mAngleMotor.setPosition(absolutePosition);
     }
 
@@ -131,7 +112,6 @@ public class SwerveModule {
         return new SwerveModulePosition(
             Conversions.rotationsToMeters(mDriveMotor.getPosition().getValue(), Constants.Swerve.wheelCircumference), 
             Rotation2d.fromRadians(mAngleMotor.getPosition().getValue())
-            //Rotation2d.fromDegrees(mAngleMotor.getPosition().getValue())
         );
     }
 }

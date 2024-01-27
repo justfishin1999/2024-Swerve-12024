@@ -1,9 +1,7 @@
 package frc.robot;
-
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
-
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -79,9 +77,9 @@ public final class Constants {
 
         /* Swerve Profiling Values */
         /** Meters per Second */
-        public static final double maxSpeed = 4.5; //TODO: This must be tuned to specific robot
+        public static final double maxSpeed = 1; //4.5 original value
         /** Radians per Second */
-        public static final double maxAngularVelocity = 10.0; //TODO: This must be tuned to specific robot
+        public static final double maxAngularVelocity = 2.5; //10.0 original value
 
         /* Neutral Modes */
         public static final NeutralModeValue angleNeutralMode = NeutralModeValue.Coast;
@@ -93,9 +91,10 @@ public final class Constants {
             public static final int driveMotorID = 1;
             public static final int angleMotorID = 11;
             public static final int canCoderID = 15;
+            public static final boolean isAngleMotorInverted = true;
             public static final Rotation2d angleOffset = Rotation2d.fromDegrees(144);
             public static final SwerveModuleConstants constants = 
-                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
+                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset, isAngleMotorInverted);
         }
 
         /* Front Right Module - Module 1 */
@@ -103,9 +102,10 @@ public final class Constants {
             public static final int driveMotorID =2;
             public static final int angleMotorID = 12;
             public static final int canCoderID = 13;
+            public static final boolean isAngleMotorInverted = true;
             public static final Rotation2d angleOffset = Rotation2d.fromDegrees(144);
             public static final SwerveModuleConstants constants = 
-                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
+                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset, isAngleMotorInverted);
         }
         
         /* Back Left Module - Module 2 */
@@ -113,9 +113,10 @@ public final class Constants {
             public static final int driveMotorID = 3;
             public static final int angleMotorID = 13;
             public static final int canCoderID = 20;
+            public static final boolean isAngleMotorInverted = true;
             public static final Rotation2d angleOffset = Rotation2d.fromDegrees(152);
             public static final SwerveModuleConstants constants = 
-                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
+                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset,isAngleMotorInverted);
         }
 
         /* Back Right Module - Module 3 */
@@ -123,15 +124,16 @@ public final class Constants {
             public static final int driveMotorID = 4;
             public static final int angleMotorID = 14;
             public static final int canCoderID = 17;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(32);
+            public static final boolean isAngleMotorInverted = true;
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(180+32);
             public static final SwerveModuleConstants constants = 
-                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
+                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset, isAngleMotorInverted);
         }
     }
 
     public static final class AutoConstants { //TODO: The below constants are used in the example auto, and must be tuned to specific robot
-        public static final double kMaxSpeedMetersPerSecond = 3;
-        public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+        public static final double kMaxSpeedMetersPerSecond = 1;
+        public static final double kMaxAccelerationMetersPerSecondSquared = 1;
         public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
         public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
     
