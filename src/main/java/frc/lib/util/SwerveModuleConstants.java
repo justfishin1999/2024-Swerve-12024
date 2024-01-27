@@ -7,7 +7,7 @@ public class SwerveModuleConstants {
     public final int angleMotorID;
     public final int cancoderID;
     public final Rotation2d angleOffset;
-    public final boolean isAngleMotorInverted;
+    public final boolean isAngleMotorInverted;//isDriveMotorInverted;
 
     /**
      * Swerve Module Constants to be used when creating swerve modules.

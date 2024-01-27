@@ -44,29 +44,32 @@ public class SwerveModule {
 
         /* Angle Motor Config */
         mAngleMotor = new TalonFX(moduleConstants.angleMotorID);
-        mAngleMotor.getConfigurator().apply(Robot.ctreConfigs.swerveAngleFXConfig);
-        if(moduleNumber==0){
-            mAngleMotor.setInverted(moduleConstants.isAngleMotorInverted);
-        }
-        else if(moduleNumber==1){
-            mAngleMotor.setInverted(moduleConstants.isAngleMotorInverted);
-        }
-        else if(moduleNumber==2){
-            mAngleMotor.setInverted(moduleConstants.isAngleMotorInverted);
-        }
-        else if(moduleNumber==3){
-            mAngleMotor.setInverted(moduleConstants.isAngleMotorInverted);
-        }
-        else{
-            System.out.println("Module number is not between 0-3");
-        }
-
-        resetToAbsolute();
+        mAngleMotor.getConfigurator().apply(Robot.ctreConfigs.swerveAngleFXConfig);        
 
         /* Drive Motor Config */
         mDriveMotor = new TalonFX(moduleConstants.driveMotorID);
         mDriveMotor.getConfigurator().apply(Robot.ctreConfigs.swerveDriveFXConfig);
         mDriveMotor.getConfigurator().setPosition(0.0);
+        if(moduleNumber==0){
+            mAngleMotor.setInverted(moduleConstants.isAngleMotorInverted);
+            resetToAbsolute();
+        }
+        else if(moduleNumber==1){
+            mAngleMotor.setInverted(moduleConstants.isAngleMotorInverted);
+            resetToAbsolute();
+        }
+        else if(moduleNumber==2){
+            mAngleMotor.setInverted(moduleConstants.isAngleMotorInverted);
+            resetToAbsolute();
+        }
+        else if(moduleNumber==3){
+            mAngleMotor.setInverted(moduleConstants.isAngleMotorInverted);
+            resetToAbsolute();
+        }
+        else{
+            System.out.println("Module number is not between 0-3");
+            resetToAbsolute();
+        }
     }
 
     public void setDesiredState(SwerveModuleState desiredState, boolean isOpenLoop){
