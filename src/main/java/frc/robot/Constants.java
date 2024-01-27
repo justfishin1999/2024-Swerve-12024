@@ -144,4 +144,14 @@ public final class Constants {
             new TrapezoidProfile.Constraints(
                 kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
     }
+
+    public static final class ShooterConstants {
+        public static final int topShooterMotorID = 1;
+        public static final int bottomShooterMotorID = 2;
+
+    }
+    public static final class IndexerConstants {
+        public static final int leftIndexMotorID = 3;
+        public static final int rightIndexMotor = 4;
+    }
 }
