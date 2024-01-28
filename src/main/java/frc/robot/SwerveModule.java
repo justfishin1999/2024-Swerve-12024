@@ -50,31 +50,16 @@ public class SwerveModule {
         mDriveMotor = new TalonFX(moduleConstants.driveMotorID);
         mDriveMotor.getConfigurator().apply(Robot.ctreConfigs.swerveDriveFXConfig);
         mDriveMotor.getConfigurator().setPosition(0.0);
-        if(moduleNumber==0){
-            mAngleMotor.setInverted(moduleConstants.isAngleMotorInverted);
-            resetToAbsolute();
-        }
-        else if(moduleNumber==1){
-            mAngleMotor.setInverted(moduleConstants.isAngleMotorInverted);
-            resetToAbsolute();
-        }
-        else if(moduleNumber==2){
-            mAngleMotor.setInverted(moduleConstants.isAngleMotorInverted);
-            resetToAbsolute();
-        }
-        else if(moduleNumber==3){
-            mAngleMotor.setInverted(moduleConstants.isAngleMotorInverted);
-            resetToAbsolute();
-        }
-        else{
-            System.out.println("Module number is not between 0-3");
-            resetToAbsolute();
-        }
+        
+        /*Invert Drive/Angle Motors */
+        mAngleMotor.setInverted(moduleConstants.isAngleMotorInverted);
+        mDriveMotor.setInverted(moduleConstants.isDriveMotorInverted);
+
+        resetToAbsolute();
     }
 
     public void setDesiredState(SwerveModuleState desiredState, boolean isOpenLoop){
         desiredState=CTREModuleState.optimize(desiredState, getState().angle);
-        //desiredState = SwerveModuleState.optimize(desiredState, getState().angle); 
         mAngleMotor.setControl(anglePosition.withPosition(desiredState.angle.getRotations()));
         setSpeed(desiredState, isOpenLoop);
     }
@@ -99,7 +84,6 @@ public class SwerveModule {
 
     public void resetToAbsolute(){
         double absolutePosition = getCANcoder().getRotations() - angleOffset.getRotations();
-        //double absolutePosition = Conversions.degreesToFalcon(getCANcoder().getDegrees() - angleOffset.getDegrees(),COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L2);
         mAngleMotor.setPosition(absolutePosition);
     }
 
@@ -111,7 +95,6 @@ public class SwerveModule {
     }
 
     public SwerveModulePosition getPosition(){
-        //System.out.println(mAngleMotor.getPosition().getValue());
         return new SwerveModulePosition(
             Conversions.rotationsToMeters(mDriveMotor.getPosition().getValue(), Constants.Swerve.wheelCircumference), 
             Rotation2d.fromRadians(mAngleMotor.getPosition().getValue())
