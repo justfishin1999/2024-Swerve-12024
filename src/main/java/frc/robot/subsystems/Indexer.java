@@ -6,9 +6,10 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkPIDController;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class Indexer {
+public class Indexer extends SubsystemBase{
     CANSparkMax m_topIndexMotor = new CANSparkMax(Constants.IndexerConstants.topIndexMotorID, MotorType.kBrushless);
     CANSparkMax m_bottomIndexMotor = new CANSparkMax(Constants.IndexerConstants.bottomIndexMotorID, MotorType.kBrushless);
 

@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
-import frc.robot.commands.ShootSpeaker;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -33,10 +32,12 @@ public class RobotContainer {
     private final JoystickButton robotCentric = new JoystickButton(driver,2);
     private final JoystickButton shootSpeaker = new JoystickButton(driver,3);
     private final JoystickButton shootAmp = new JoystickButton(driver,4);
+    private final JoystickButton runIndex = new JoystickButton(driver,5);
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
     private final Shooter s_Shooter = new Shooter();
+    private final Indexer s_Indexer = new Indexer();
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -70,6 +71,10 @@ public class RobotContainer {
 
         /*Create binding for shooting amp */
         shootAmp.onTrue(new ShootAmp(s_Shooter,500,2000));
+
+        /*Create binding for running indexer */
+        runIndex.onTrue(new RunIndexer(s_Indexer, 2000));
+    
     }
 
     /**

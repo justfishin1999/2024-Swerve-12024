@@ -157,7 +157,7 @@ public final class Constants {
 
     }
     public static final class IndexerConstants {
-        public static final int leftIndexMotorID = 3;
-        public static final int rightIndexMotor = 4;
+        public static final int topIndexMotorID = 3;
+        public static final int bottomIndexMotorID = 4;
     }
 }
