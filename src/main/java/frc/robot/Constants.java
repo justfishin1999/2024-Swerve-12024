@@ -158,6 +158,9 @@ public final class Constants {
         public static final double shooter_I = 0.0;
         public static final double shooter_D = 0.0;
         public static final double shooter_FF = 0.0;
+        public static final int top_shooterVelo = 0;
+        public static final int bottom_shooterVelo = 0;
+        public static final int combined_shooterVelo = 0;
 
     }
     public static final class IndexerConstants {
@@ -167,5 +170,6 @@ public final class Constants {
         public static final double index_I = 0.0;
         public static final double index_D = 0.0;
         public static final double index_FF = 0.0;
+        public static final int indexVelo = 0;
     }
 }

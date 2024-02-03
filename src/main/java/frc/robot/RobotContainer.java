@@ -67,13 +67,13 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
         /*Create binding for shooting speaker */
-        shootSpeaker.onTrue(new ShootSpeaker(s_Shooter, 4000));
+        shootSpeaker.onTrue(new ShootSpeaker(s_Shooter,Constants.ShooterConstants.combined_shooterVelo));
 
         /*Create binding for shooting amp */
-        shootAmp.onTrue(new ShootAmp(s_Shooter,500,2000));
+        shootAmp.onTrue(new ShootAmp(s_Shooter,Constants.ShooterConstants.top_shooterVelo,Constants.ShooterConstants.bottom_shooterVelo));
 
         /*Create binding for running indexer */
-        runIndex.onTrue(new RunIndexer(s_Indexer, 2000));
+        runIndex.onTrue(new RunIndexer(s_Indexer, Constants.IndexerConstants.indexVelo));
     
     }
 
