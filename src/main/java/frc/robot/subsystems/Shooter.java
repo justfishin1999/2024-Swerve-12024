@@ -15,10 +15,10 @@ public class Shooter extends SubsystemBase {
     public int velo, topVelo, bottomVelo;
 
     public Shooter() {
-        s_kP = 0.0;
-        s_kI = 0.0;
-        s_kD = 0.0;
-        s_kFF = 0.0;
+        s_kP = Constants.ShooterConstants.shooter_P;
+        s_kI = Constants.ShooterConstants.shooter_I;
+        s_kD = Constants.ShooterConstants.shooter_D;
+        s_kFF = Constants.ShooterConstants.shooter_FF;
 
         m_bottomShooterMotor.restoreFactoryDefaults();
         m_topShooterMotor.restoreFactoryDefaults();

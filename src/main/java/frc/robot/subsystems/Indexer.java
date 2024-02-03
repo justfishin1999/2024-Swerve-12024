@@ -18,10 +18,10 @@ public class Indexer extends SubsystemBase{
     public int velo, topVelo, bottomVelo;
 
     public Indexer() {
-        s_kP = 0.0;
-        s_kI = 0.0;
-        s_kD = 0.0;
-        s_kFF = 0.0;
+        s_kP = Constants.IndexerConstants.index_P;
+        s_kI = Constants.IndexerConstants.index_I;
+        s_kD = Constants.IndexerConstants.index_D;
+        s_kFF = Constants.IndexerConstants.index_FF;
 
         m_bottomIndexMotor.restoreFactoryDefaults();
         m_topIndexMotor.restoreFactoryDefaults();
