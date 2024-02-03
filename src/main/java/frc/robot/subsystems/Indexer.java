@@ -39,7 +39,7 @@ public class Indexer extends SubsystemBase{
 
     public void periodic(){
         //Output the velocity of the shooter motors to the dashboard
-        SmartDashboard.putNumber("Top Indexer Motor Velocity:",topVelo);
+        SmartDashboard.putNumber("Top Indexer Motor Velocity:",m_topIndexMotor.getEncoder().getVelocity());
     }
 
     public void runIndex(int Velo){

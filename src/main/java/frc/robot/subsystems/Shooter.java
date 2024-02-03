@@ -45,8 +45,8 @@ public class Shooter extends SubsystemBase {
 
     public void periodic(){
         //Output the velocity of the shooter motors to the dashboard
-        SmartDashboard.putNumber("Top Shooter Motor Velocity:",topVelo);
-        SmartDashboard.putNumber("Bottom Shooter Motor Velocity:",bottomVelo);
+        SmartDashboard.putNumber("Top Shooter Motor Velocity:",m_topShooterMotor.getEncoder().getVelocity());
+        SmartDashboard.putNumber("Bottom Shooter Motor Velocity:",m_bottomShooterMotor.getEncoder().getVelocity());
     }
 
     public void shootSpeaker(int Velo){

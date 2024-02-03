@@ -77,9 +77,9 @@ public final class Constants {
 
         /* Swerve Profiling Values */
         /** Meters per Second */
-        public static final double maxSpeed = 1; //4.5 original value
+        public static final double maxSpeed = 4.5; //4.5 original value
         /** Radians per Second */
-        public static final double maxAngularVelocity = 2.5; //10.0 original value
+        public static final double maxAngularVelocity = 10.0; //10.0 original value
 
         /* Neutral Modes */
         public static final NeutralModeValue angleNeutralMode = NeutralModeValue.Coast;
@@ -93,7 +93,7 @@ public final class Constants {
             public static final int angleMotorID = 11;
             public static final int canCoderID = 0;
             public static final boolean isAngleMotorInverted = true;
-            public static final boolean isDriveMotorInverted = false;
+            public static final boolean isDriveMotorInverted = true;
             public static final Rotation2d angleOffset = Rotation2d.fromDegrees(142);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset, isAngleMotorInverted, isDriveMotorInverted);
@@ -105,7 +105,7 @@ public final class Constants {
             public static final int angleMotorID = 12;
             public static final int canCoderID = 1;
             public static final boolean isAngleMotorInverted = false;
-            public static final boolean isDriveMotorInverted = true;
+            public static final boolean isDriveMotorInverted = false;
             public static final Rotation2d angleOffset = Rotation2d.fromDegrees(140);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset, isAngleMotorInverted, isDriveMotorInverted);
@@ -117,7 +117,7 @@ public final class Constants {
             public static final int angleMotorID = 13;
             public static final int canCoderID = 2;
             public static final boolean isAngleMotorInverted = true;
-            public static final boolean isDriveMotorInverted = true;
+            public static final boolean isDriveMotorInverted = false;
             public static final Rotation2d angleOffset = Rotation2d.fromDegrees(156);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset,isAngleMotorInverted, isDriveMotorInverted);
@@ -129,7 +129,7 @@ public final class Constants {
             public static final int angleMotorID = 14;
             public static final int canCoderID = 3;
             public static final boolean isAngleMotorInverted = true;
-            public static final boolean isDriveMotorInverted = true;
+            public static final boolean isDriveMotorInverted = false;
             public static final Rotation2d angleOffset = Rotation2d.fromDegrees(210);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset, isAngleMotorInverted, isDriveMotorInverted);
@@ -158,10 +158,10 @@ public final class Constants {
         public static final double shooter_P = 6e-5;
         public static final double shooter_I = 0.0;
         public static final double shooter_D = 0.0;
-        public static final double shooter_FF = 0.00015;
+        public static final double shooter_FF = 0.00019;
         public static final int top_shooterVelo = -800;
         public static final int bottom_shooterVelo = -2250;
-        public static final int combined_shooterVelo = -4000;
+        public static final int combined_shooterVelo = -4250;
 
     }
     public static final class IndexerConstants {
