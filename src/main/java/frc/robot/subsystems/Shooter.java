@@ -37,6 +37,10 @@ public class Shooter extends SubsystemBase {
 
         m_BottomShooterPIDController.setFF(s_kFF);
         m_TopShooterPidController.setFF(s_kFF);
+
+        m_BottomShooterPIDController.setOutputRange(Constants.minMaxOutputConstants.kMinOutput,Constants.minMaxOutputConstants.kMaxOutput);
+        m_TopShooterPidController.setOutputRange(Constants.minMaxOutputConstants.kMinOutput,Constants.minMaxOutputConstants.kMaxOutput);
+
     }
 
     public void periodic(){

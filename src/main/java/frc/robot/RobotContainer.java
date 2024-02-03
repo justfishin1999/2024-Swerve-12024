@@ -28,11 +28,11 @@ public class RobotContainer {
     private final int rotationAxis = 4;
 
     /* Driver Buttons */
-    private final JoystickButton zeroGyro = new JoystickButton(driver,1);
-    private final JoystickButton robotCentric = new JoystickButton(driver,2);
-    private final JoystickButton shootSpeaker = new JoystickButton(driver,3);
-    private final JoystickButton shootAmp = new JoystickButton(driver,4);
-    private final JoystickButton runIndex = new JoystickButton(driver,5);
+    private final JoystickButton zeroGyro = new JoystickButton(driver,1); //A
+    private final JoystickButton robotCentric = new JoystickButton(driver,2); //B
+    private final JoystickButton shootSpeaker = new JoystickButton(driver,5); //LB
+    private final JoystickButton shootAmp = new JoystickButton(driver,6); //RB
+    private final JoystickButton runIndex = new JoystickButton(driver,4); //Y
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
@@ -67,17 +67,20 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
         /*Create binding for shooting speaker */
-        shootSpeaker.onTrue(new ShootSpeaker(s_Shooter,Constants.ShooterConstants.combined_shooterVelo));
+        shootSpeaker.whileTrue(new ShootSpeaker(s_Shooter,Constants.ShooterConstants.combined_shooterVelo));
+        shootSpeaker.whileFalse(new ShootSpeaker(s_Shooter,0));
 
         /*Create binding for shooting amp */
-        shootAmp.onTrue(new ShootAmp(s_Shooter,Constants.ShooterConstants.top_shooterVelo,Constants.ShooterConstants.bottom_shooterVelo));
+        shootAmp.whileTrue(new ShootAmp(s_Shooter,Constants.ShooterConstants.top_shooterVelo,Constants.ShooterConstants.bottom_shooterVelo));
+        shootAmp.whileFalse(new ShootAmp(s_Shooter,0,0));
 
         /*Create binding for running indexer */
-        runIndex.onTrue(new RunIndexer(s_Indexer, Constants.IndexerConstants.indexVelo));
+        runIndex.whileTrue(new RunIndexer(s_Indexer, Constants.IndexerConstants.indexVelo));
+        runIndex.whileFalse(new RunIndexer(s_Indexer, 0));
     
     }
 
-    /**
+    /**P
      * Use this to pass the autonomous command to the main {@link Robot} class.
      *
      * @return the command to run in autonomous

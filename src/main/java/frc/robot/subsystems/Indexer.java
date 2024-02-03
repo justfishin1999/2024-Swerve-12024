@@ -33,6 +33,8 @@ public class Indexer extends SubsystemBase{
         m_TopIndexerPIDController.setD(s_kD);
 
         m_TopIndexerPIDController.setFF(s_kFF);
+
+        m_TopIndexerPIDController.setOutputRange(Constants.minMaxOutputConstants.kMinOutput, Constants.minMaxOutputConstants.kMaxOutput);
     }
 
     public void periodic(){
