@@ -14,19 +14,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Drive-To-Speaker"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": null
+            "pathName": "1 Score - 1 Collect"
           }
         }
       ]

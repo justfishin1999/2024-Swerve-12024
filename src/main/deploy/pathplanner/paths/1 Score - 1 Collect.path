@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 1.9229831326995024,
-        "y": 1.475565404768469
+        "y": 1.5106979144058135
       },
       "prevControl": null,
       "nextControl": {
         "x": 2.9652475852740565,
-        "y": 1.475565404768469
+        "y": 1.5106979144058135
       },
       "isLocked": false,
       "linkedName": null
@@ -52,8 +52,8 @@
         "y": 7.14361029292672
       },
       "prevControl": {
-        "x": 6.727600913809423,
-        "y": 5.7294750738250135
+        "x": 4.909246451873787,
+        "y": 7.108477783289376
       },
       "nextControl": null,
       "isLocked": false,
@@ -73,7 +73,75 @@
     }
   ],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "ShootSpeaker",
+      "waypointRelativePos": 0.95,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 1.0
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "ShootSpeaker"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Collect",
+      "waypointRelativePos": 2.1999999999999997,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "RunIndexer(1000)"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Stop-Collect",
+      "waypointRelativePos": 2.35,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "RunIndexer(0)"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "End",
+      "waypointRelativePos": 3.0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": []
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
