@@ -152,8 +152,8 @@ public final class Constants {
     }
 
     public static final class ShooterConstants {
-        public static final int topShooterMotorID = 1;
-        public static final int bottomShooterMotorID = 2;
+        public static final int topShooterMotorID = 20;
+        public static final int bottomShooterMotorID = 30;
         public static final double shooter_P = 0.0;
         public static final double shooter_I = 0.0;
         public static final double shooter_D = 0.0;
@@ -164,8 +164,7 @@ public final class Constants {
 
     }
     public static final class IndexerConstants {
-        public static final int topIndexMotorID = 3;
-        public static final int bottomIndexMotorID = 4;
+        public static final int topIndexMotorID = 10;
         public static final double index_P = 0.0;
         public static final double index_I = 0.0;
         public static final double index_D = 0.0;
