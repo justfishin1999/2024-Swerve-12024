@@ -1,7 +1,4 @@
 package frc.robot.commands;
-
-import java.util.function.IntSupplier;
-
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Shooter;
 
@@ -15,7 +12,6 @@ public class ShootSpeaker extends Command{
         this.c_velocity = c_velocity;
         addRequirements(s_Shooter);
     }
-    
     public void execute(){
         //Set the shooter to the desired speed
         s_Shooter.shootSpeaker(c_velocity);
