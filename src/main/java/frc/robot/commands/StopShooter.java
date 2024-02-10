@@ -2,10 +2,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Shooter;
 
-public class ShootSpeaker extends Command{
+public class StopShooter extends Command {
     private Shooter s_Shooter;
 
-    public ShootSpeaker(Shooter s_Shooter){
+    public StopShooter(Shooter s_Shooter){
         this.s_Shooter = s_Shooter;
         addRequirements(s_Shooter);
     }

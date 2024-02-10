@@ -54,6 +54,23 @@
   "constraintZones": [],
   "eventMarkers": [
     {
+      "name": "Shoot 1st Note",
+      "waypointRelativePos": 0.0,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "ShootSpeaker"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
       "name": "Pick Up Note",
       "waypointRelativePos": 0.6,
       "command": {
@@ -88,35 +105,6 @@
       }
     },
     {
-      "name": "Shoot 1st Note",
-      "waypointRelativePos": 0.0,
-      "command": {
-        "type": "sequential",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "ShootSpeaker"
-              }
-            },
-            {
-              "type": "wait",
-              "data": {
-                "waitTime": 1.0
-              }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "StopShootSpeaker"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
       "name": "Shoot 2nd Note",
       "waypointRelativePos": 2.0,
       "command": {
@@ -127,18 +115,6 @@
               "type": "named",
               "data": {
                 "name": "ShootSpeaker"
-              }
-            },
-            {
-              "type": "wait",
-              "data": {
-                "waitTime": 0.5
-              }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "StopShootSpeaker"
               }
             }
           ]

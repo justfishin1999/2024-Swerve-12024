@@ -1,10 +1,15 @@
 package frc.robot;
 
+import com.pathplanner.lib.auto.NamedCommands;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.autos.*;
@@ -52,6 +57,10 @@ public class RobotContainer {
             )
         );
 
+    NamedCommands.registerCommand("ShootSpeaker", ShootSpeaker());
+    NamedCommands.registerCommand("RunIndex", RunIndex());
+    NamedCommands.registerCommand("StopIndex", StopIndex());
+
         // Configure the button bindings
         configureButtonBindings();
     }
@@ -67,8 +76,8 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
         /*Create binding for shooting speaker */
-        shootSpeaker.whileTrue(new ShootSpeaker(s_Shooter,Constants.ShooterConstants.combined_shooterVelo));
-        shootSpeaker.whileFalse(new ShootSpeaker(s_Shooter,0));
+        shootSpeaker.whileTrue(new ShootSpeaker(s_Shooter));
+        shootSpeaker.whileFalse(new StopShooter(s_Shooter));
 
         /*Create binding for shooting amp */
         shootAmp.whileTrue(new ShootAmp(s_Shooter,Constants.ShooterConstants.top_shooterVelo,Constants.ShooterConstants.bottom_shooterVelo));
@@ -88,5 +97,24 @@ public class RobotContainer {
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
         return new exampleAuto(s_Swerve);
+    }
+
+    public Command ShootSpeaker(){
+        return new SequentialCommandGroup(
+                    new ShootSpeaker(s_Shooter),
+                    new WaitCommand(1),
+                    new StopShooter(s_Shooter));
+    }
+
+    public Command RunIndex(){
+        return new SequentialCommandGroup(
+                    new RunIndexer(s_Indexer, Constants.IndexerConstants.indexVelo)
+        );
+    }
+
+    public Command StopIndex(){
+        return new SequentialCommandGroup(
+                    new RunIndexer(s_Indexer, 0)            
+        );
     }
 }
