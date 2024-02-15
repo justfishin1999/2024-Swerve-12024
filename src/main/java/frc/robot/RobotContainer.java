@@ -71,13 +71,16 @@ public class RobotContainer {
     SmartDashboard.putData("Auto Mode", autoChooser);
 
     configureBindings();
-        // Configure the button bindings
-        configureButtonBindings();
+    // Configure the button bindings
+    configureButtonBindings();
+    
     }
 
 
     private void configureBindings(){
-        SmartDashboard.putData("Auto Chooser",new PathPlannerAuto("Shoot-Pick-Shoot-Auto"));
+        SmartDashboard.putData("Right Auto",new PathPlannerAuto("Shoot-Pick-Shoot-Auto"));
+        SmartDashboard.putData("Middle Auto",new PathPlannerAuto("MiddleAuto"));
+        SmartDashboard.putData("Left Auto",new PathPlannerAuto("LeftAuto"));
     }
     /**
      * Use this method to define your button->command mappings. Buttons can be created by
