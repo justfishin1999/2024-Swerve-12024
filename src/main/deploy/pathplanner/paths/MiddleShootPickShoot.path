@@ -3,59 +3,53 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.7805585557503859,
-        "y": 6.858213644870939
+        "x": 1.36086297850199,
+        "y": 5.562647359246215
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.864428949973955,
-        "y": 6.979658581281076
+        "x": 2.36086297850199,
+        "y": 5.562647359246215
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.894982565999367,
-        "y": 6.979658581285779
+        "x": 3.246307662372813,
+        "y": 5.562647359246215
       },
       "prevControl": {
-        "x": 2.8920823532367437,
-        "y": 6.956725296167336
+        "x": 2.4288385509723933,
+        "y": 5.562647359246215
       },
       "nextControl": {
-        "x": 2.8978827787619905,
-        "y": 7.002591866404223
+        "x": 4.063776773773233,
+        "y": 5.562647359246215
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 0.7805585557503859,
-        "y": 6.858213644870939
+        "x": 1.36086297850199,
+        "y": 5.562647359246215
       },
       "prevControl": {
-        "x": 1.876139786519737,
-        "y": 6.967947744735294
+        "x": 2.7076091812668643,
+        "y": 5.562647359246215
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 1,
-      "rotationDegrees": 0,
-      "rotateFast": true
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Shoot 1st Note",
-      "waypointRelativePos": 0.0,
+      "name": "ShootSpeaker",
+      "waypointRelativePos": 0.5,
       "command": {
         "type": "sequential",
         "data": {
@@ -71,8 +65,8 @@
       }
     },
     {
-      "name": "Pick Up Note",
-      "waypointRelativePos": 0.6,
+      "name": "StartPickup",
+      "waypointRelativePos": 0,
       "command": {
         "type": "sequential",
         "data": {
@@ -88,25 +82,8 @@
       }
     },
     {
-      "name": "Stop Index",
-      "waypointRelativePos": 1.15,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "StopIndex"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "Shoot 2nd Note",
-      "waypointRelativePos": 2.0,
+      "name": "StopIndex",
+      "waypointRelativePos": 1.75,
       "command": {
         "type": "sequential",
         "data": {
@@ -114,7 +91,7 @@
             {
               "type": "named",
               "data": {
-                "name": "ShootSpeaker"
+                "name": "StopIndex"
               }
             }
           ]
@@ -130,13 +107,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 59.0362434679265,
+    "rotation": 0,
     "rotateFast": false
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 59.4386875980946,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": false
