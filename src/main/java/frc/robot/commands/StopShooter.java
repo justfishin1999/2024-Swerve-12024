@@ -11,7 +11,7 @@ public class StopShooter extends Command {
     }
     public void execute(){
         //Set the shooter to the desired speed
-        s_Shooter.shootSpeaker(4000);
+        s_Shooter.shootSpeaker(0);
     }
     public void isInterrupted(){
         //Stop shooter if command is interrupted
