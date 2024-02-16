@@ -57,9 +57,6 @@ public class RobotContainer {
     private final Climber s_Climber = new Climber();
 
     private final SendableChooser<Command> autoChooser;
-
-    /*Digital input for photoeye */ 
-    private final DigitalInput m_photoswitch = new DigitalInput(Constants.IndexerConstants.photoswitchID);
     
     /*Creates the photoswitch or photoeye */
     public boolean getphotoswitch() {
@@ -132,14 +129,14 @@ public class RobotContainer {
         ShootREV.whileFalse(new ShootRev(s_Shooter,0));
         
         /*Create binding for running indexer */
-        runIndex.whileTrue(new RunIndexer(s_Indexer, Constants.IndexerConstants.indexVelo, getphotoswitch()));
-        runIndex.whileFalse(new RunIndexer(s_Indexer, 0, getphotoswitch()));
+        runIndex.whileTrue(new RunIndexer(s_Indexer, Constants.IndexerConstants.indexVelo));
+        runIndex.whileFalse(new RunIndexer(s_Indexer, 0));
         
-        runIndexFWD.whileTrue(new RunIndexer(s_Indexer, Constants.IndexerConstants.IndexVeloFWD,getphotoswitch()));
-        runIndexFWD.whileFalse(new RunIndexer(s_Indexer, 0, getphotoswitch()));
+        runIndexFWD.whileTrue(new RunIndexer(s_Indexer, Constants.IndexerConstants.IndexVeloFWD));
+        runIndexFWD.whileFalse(new RunIndexer(s_Indexer, 0));
         
-        runIndexREV.whileTrue(new RunIndexer(s_Indexer, Constants.IndexerConstants.indexVeloREV, getphotoswitch()));
-        runIndexREV.whileFalse(new RunIndexer(s_Indexer, 0, getphotoswitch()));
+        runIndexREV.whileTrue(new RunIndexer(s_Indexer, Constants.IndexerConstants.indexVeloREV));
+        runIndexREV.whileFalse(new RunIndexer(s_Indexer, 0));
     
     }
 
