@@ -171,7 +171,10 @@ public final class Constants {
         public static final double index_I = 0.0;
         public static final double index_D = 0.0;
         public static final double index_FF = 0.00015;
+        public static final int photoswitchID = 4;
         public static final int indexVelo = 3500;
+        public static final int IndexVeloFWD = 1500;
+        public static final int indexVeloREV = -1500;
     }
 
     public static final class ClimberConstants {
