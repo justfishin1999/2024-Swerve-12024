@@ -19,6 +19,9 @@ public class Indexer extends SubsystemBase{
     Timer m_timer = new Timer();
     
     CANSparkMax m_topIndexMotor = new CANSparkMax(Constants.IndexerConstants.topIndexMotorID, MotorType.kBrushless);
+    
+    /*Digital input for photoeye */ 
+    final DigitalInput m_photoswitch = new DigitalInput(Constants.IndexerConstants.photoswitchID);
 
     private SparkPIDController m_TopIndexerPIDController;
     public double s_kP, s_kI, s_kD, s_kFF;
@@ -49,9 +52,9 @@ public class Indexer extends SubsystemBase{
         //Output the velocity of the shooter motors to the dashboard
         SmartDashboard.putNumber("Top Indexer Motor Velocity:",m_topIndexMotor.getEncoder().getVelocity());
 
-        /*Digital input for photoeye */ 
-        final DigitalInput m_photoswitch = new DigitalInput(Constants.IndexerConstants.photoswitchID);
+        /*Try to get the values of the photoswitch?? */
         photoswitch = m_photoswitch.get();
+        SmartDashboard.putBoolean("Velo photoswitch",photoswitch);
 
     }
 
@@ -61,14 +64,11 @@ public class Indexer extends SubsystemBase{
 
     public void runIndex(int Velo){
         //set the velocity of the motor based on input value
-
             if (photoswitch) {
                 m_TopIndexerPIDController.setReference(Velo,CANSparkBase.ControlType.kVelocity);
-            SmartDashboard.putBoolean("Velo photoswitch",photoswitch);
             }
             else if (!photoswitch) {
                 m_TopIndexerPIDController.setReference(0,CANSparkBase.ControlType.kVelocity);
-            SmartDashboard.putBoolean("Velo photoswitch",photoswitch);
             }
 
     }
