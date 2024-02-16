@@ -5,16 +5,24 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkPIDController;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Indexer extends SubsystemBase{
+
+    double go = 0;
+    double Timer = 0;
+    double state = 1;
+    Timer m_timer = new Timer();
+    
     CANSparkMax m_topIndexMotor = new CANSparkMax(Constants.IndexerConstants.topIndexMotorID, MotorType.kBrushless);
 
     private SparkPIDController m_TopIndexerPIDController;
     public double s_kP, s_kI, s_kD, s_kFF;
-    public int velo, topVelo, bottomVelo;
+    public boolean photoswitch;
 
     public Indexer() {
         s_kP = Constants.IndexerConstants.index_P;
@@ -40,16 +48,45 @@ public class Indexer extends SubsystemBase{
     public void periodic(){
         //Output the velocity of the shooter motors to the dashboard
         SmartDashboard.putNumber("Top Indexer Motor Velocity:",m_topIndexMotor.getEncoder().getVelocity());
+
+        /*Digital input for photoeye */ 
+        final DigitalInput m_photoswitch = new DigitalInput(Constants.IndexerConstants.photoswitchID);
+        photoswitch = m_photoswitch.get();
+
+    }
+
+    public boolean getphotoswitch(){
+        return photoswitch;
     }
 
     public void runIndex(int Velo){
         //set the velocity of the motor based on input value
-        m_TopIndexerPIDController.setReference(Velo,CANSparkBase.ControlType.kVelocity);
-    }
 
+            if (photoswitch) {
+                m_TopIndexerPIDController.setReference(Velo,CANSparkBase.ControlType.kVelocity);
+            SmartDashboard.putBoolean("Velo photoswitch",photoswitch);
+            }
+            else if (!photoswitch) {
+                m_TopIndexerPIDController.setReference(0,CANSparkBase.ControlType.kVelocity);
+            SmartDashboard.putBoolean("Velo photoswitch",photoswitch);
+            }
+
+    }
+    public void runIndexFWD(int VeloFWD){
+        //set the velocity of the motor based on input value
+        
+            m_TopIndexerPIDController.setReference(VeloFWD,CANSparkBase.ControlType.kVelocity);
+        
+    }
+    public void runIndexREV(int VeloREV){
+        //set the velocity of the motor based on input value
+      
+            m_TopIndexerPIDController.setReference(-1*VeloREV,CANSparkBase.ControlType.kVelocity);
+        
+        
+    }
     public void stop(){
         //stop the motor
         m_TopIndexerPIDController.setReference(0,CANSparkBase.ControlType.kVelocity);
     }
 }
-
