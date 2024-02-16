@@ -61,6 +61,12 @@ public class Shooter extends SubsystemBase {
         m_TopShooterPidController.setReference(topVelo,CANSparkBase.ControlType.kVelocity);
     }
 
+    public void shootREV(int revVelo){
+        //set the velocity of the motor based on input value
+        m_BottomShooterPIDController.setReference(revVelo,CANSparkBase.ControlType.kVelocity);
+        m_TopShooterPidController.setReference(revVelo,CANSparkBase.ControlType.kVelocity);
+    }
+
     public void stop(){
         //stop the motor
         m_BottomShooterPIDController.setReference(0,CANSparkBase.ControlType.kVelocity);
