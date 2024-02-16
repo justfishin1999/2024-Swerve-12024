@@ -37,18 +37,37 @@ public class RobotContainer {
     private final int rotationAxis = 4;
 
     /* Driver Buttons */
-    private final JoystickButton zeroGyro = new JoystickButton(driver,1); //A
-    private final JoystickButton robotCentric = new JoystickButton(driver,2); //B
+    private final JoystickButton runIndex = new JoystickButton(driver,1); //A
+    private final JoystickButton runIndexFWD = new JoystickButton(driver,2); //B
+    private final JoystickButton runIndexREV = new JoystickButton(driver,3); //X
+    private final JoystickButton ShootREV = new JoystickButton(driver, 4); //Y
     private final JoystickButton shootSpeaker = new JoystickButton(driver,5); //LB
     private final JoystickButton shootAmp = new JoystickButton(driver,6); //RB
-    private final JoystickButton runIndex = new JoystickButton(driver,4); //Y
+    private final JoystickButton robotCentric = new JoystickButton(driver,8); //Back
+    private final JoystickButton zeroGyro = new JoystickButton(driver,7); //Start
+
+    /* Operator Controls */
+    private final int climberRight = 1;
+    private final int climberLeft = 5;
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
     private final Shooter s_Shooter = new Shooter();
     private final Indexer s_Indexer = new Indexer();
+    private final Climber s_Climber = new Climber();
 
     private final SendableChooser<Command> autoChooser;
+
+    /*Digital input for photoeye */ 
+    private final DigitalInput m_photoswitch = new DigitalInput(Constants.IndexerConstants.photoswitchID);
+    
+    /*Creates the photoswitch or photoeye */
+    public boolean getphotoswitch() {
+        while(true){
+             final boolean photoswitch = m_photoswitch.get();
+             return photoswitch;
+        } 
+    }
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -60,6 +79,14 @@ public class RobotContainer {
                 () -> -driver.getRawAxis(strafeAxis)*0.5, 
                 () -> -driver.getRawAxis(rotationAxis)*0.5, 
                 () -> robotCentric.getAsBoolean()
+            )
+        );
+
+        s_Climber.setDefaultCommand(
+            new Climb(
+                s_Climber,
+                () -> operator.getRawAxis (climberRight)*1,
+                () -> operator.getRawAxis (climberLeft)*-1
             )
         );
 
@@ -93,16 +120,26 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
         /*Create binding for shooting speaker */
-        shootSpeaker.whileTrue(new ShootSpeaker(s_Shooter));
-        shootSpeaker.whileFalse(new StopShooter(s_Shooter));
+        shootSpeaker.whileTrue(new ShootSpeaker(s_Shooter,Constants.ShooterConstants.combined_shooterVelo));
+        shootSpeaker.whileFalse(new ShootSpeaker(s_Shooter,0));
 
         /*Create binding for shooting amp */
         shootAmp.whileTrue(new ShootAmp(s_Shooter,Constants.ShooterConstants.top_shooterVelo,Constants.ShooterConstants.bottom_shooterVelo));
         shootAmp.whileFalse(new ShootAmp(s_Shooter,0,0));
 
+        /*Create binding for shooter running in reverse */
+        ShootREV.whileTrue(new ShootRev(s_Shooter,Constants.ShooterConstants.rev_shooterVelo));
+        ShootREV.whileFalse(new ShootRev(s_Shooter,0));
+        
         /*Create binding for running indexer */
-        runIndex.whileTrue(new RunIndexer(s_Indexer, Constants.IndexerConstants.indexVelo));
-        runIndex.whileFalse(new RunIndexer(s_Indexer, 0));
+        runIndex.whileTrue(new RunIndexer(s_Indexer, Constants.IndexerConstants.indexVelo, getphotoswitch()));
+        runIndex.whileFalse(new RunIndexer(s_Indexer, 0, getphotoswitch()));
+        
+        runIndexFWD.whileTrue(new RunIndexer(s_Indexer, Constants.IndexerConstants.IndexVeloFWD,getphotoswitch()));
+        runIndexFWD.whileFalse(new RunIndexer(s_Indexer, 0, getphotoswitch()));
+        
+        runIndexREV.whileTrue(new RunIndexer(s_Indexer, Constants.IndexerConstants.indexVeloREV, getphotoswitch()));
+        runIndexREV.whileFalse(new RunIndexer(s_Indexer, 0, getphotoswitch()));
     
     }
 
