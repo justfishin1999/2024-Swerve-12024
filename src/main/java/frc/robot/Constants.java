@@ -160,8 +160,9 @@ public final class Constants {
         public static final double shooter_D = 0.0;
         public static final double shooter_FF = 0.00019;
         public static final int top_shooterVelo = -800;
-        public static final int bottom_shooterVelo = -2250;
+        public static final int bottom_shooterVelo = -2400;
         public static final int combined_shooterVelo = -4250;
+        public static final int rev_shooterVelo = -800;
 
     }
     public static final class IndexerConstants {
@@ -171,6 +172,17 @@ public final class Constants {
         public static final double index_D = 0.0;
         public static final double index_FF = 0.00015;
         public static final int indexVelo = 3500;
+    }
+
+    public static final class ClimberConstants {
+        public static final int RightClimberID = 40;
+        public static final int LeftClimberID = 50;
+        public static final double climber_P = 6e-5;
+        public static final double climber_I = 0.0;
+        public static final double climber_D = 0.0;
+        public static final double climber_FF = 0.00015;
+        public static final int climberVelo = 3500;
+
     }
 
     public static final class minMaxOutputConstants {
