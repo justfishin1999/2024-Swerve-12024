@@ -57,14 +57,6 @@ public class RobotContainer {
     private final Climber s_Climber = new Climber();
 
     private final SendableChooser<Command> autoChooser;
-    
-    /*Creates the photoswitch or photoeye */
-    public boolean getphotoswitch() {
-        while(true){
-             final boolean photoswitch = m_photoswitch.get();
-             return photoswitch;
-        } 
-    }
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -152,9 +144,9 @@ public class RobotContainer {
 
     public Command ShootSpeaker(){
         return new SequentialCommandGroup(
-                    new ShootSpeaker(s_Shooter),
+                    new ShootSpeaker(s_Shooter,Constants.ShooterConstants.combined_shooterVelo),
                     new WaitCommand(1),
-                    new StopShooter(s_Shooter));
+                    new StopShooter(s_Shooter,Constants.ShooterConstants.combined_shooterVelo));
     }
 
     public Command RunIndex(){
