@@ -1,5 +1,7 @@
 package frc.robot;
 
+import java.util.function.DoubleSupplier;
+
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
@@ -60,18 +62,18 @@ public class RobotContainer {
 
     private final SendableChooser<Command> autoChooser;
 
-    private double speedVal;
+    private DoubleSupplier speedVal;
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
-        speedVal=0.5;
+        speedVal=()->0.5;
         s_Swerve.setDefaultCommand(
             new TeleopSwerve(
                 s_Swerve, 
-                () -> -driver.getRawAxis(translationAxis)*speedVal, 
-                () -> -driver.getRawAxis(strafeAxis)*speedVal, 
-                () -> -driver.getRawAxis(rotationAxis)*speedVal, 
+                () -> -driver.getRawAxis(translationAxis)*speedVal.getAsDouble(), 
+                () -> -driver.getRawAxis(strafeAxis)*speedVal.getAsDouble(), 
+                () -> -driver.getRawAxis(rotationAxis)*speedVal.getAsDouble(), 
                 () -> robotCentric.getAsBoolean()
             )
         );
@@ -135,8 +137,8 @@ public class RobotContainer {
         runIndexREV.whileTrue(new RunIndexer(s_Indexer, Constants.IndexerConstants.indexVeloREV));
         runIndexREV.whileFalse(new RunIndexer(s_Indexer, 0));
 
-        highSpeed.whileTrue(new InstantCommand(() -> speedVal=0.5));
-        lowSpeed.whileTrue(new InstantCommand(() -> speedVal=0.25));
+        highSpeed.whileTrue(new InstantCommand(() -> speedVal.equals(0.5)));
+        lowSpeed.whileTrue(new InstantCommand(() -> speedVal.equals(0.25)));
     
     }
 
