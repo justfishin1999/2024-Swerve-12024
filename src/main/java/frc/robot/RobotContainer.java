@@ -45,6 +45,8 @@ public class RobotContainer {
     private final JoystickButton shootAmp = new JoystickButton(driver,6); //RB
     private final JoystickButton robotCentric = new JoystickButton(driver,8); //Back
     private final JoystickButton zeroGyro = new JoystickButton(driver,7); //Start
+    private final JoystickButton highSpeed = new JoystickButton(driver,8);
+    private final JoystickButton lowSpeed = new JoystickButton(driver,10);
 
     /* Operator Controls */
     private final int climberRight = 1;
@@ -58,15 +60,18 @@ public class RobotContainer {
 
     private final SendableChooser<Command> autoChooser;
 
+    private double speedVal;
+
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
+        speedVal=0.5;
         s_Swerve.setDefaultCommand(
             new TeleopSwerve(
                 s_Swerve, 
-                () -> -driver.getRawAxis(translationAxis)*0.5, 
-                () -> -driver.getRawAxis(strafeAxis)*0.5, 
-                () -> -driver.getRawAxis(rotationAxis)*0.5, 
+                () -> -driver.getRawAxis(translationAxis)*speedVal, 
+                () -> -driver.getRawAxis(strafeAxis)*speedVal, 
+                () -> -driver.getRawAxis(rotationAxis)*speedVal, 
                 () -> robotCentric.getAsBoolean()
             )
         );
@@ -129,6 +134,9 @@ public class RobotContainer {
         
         runIndexREV.whileTrue(new RunIndexer(s_Indexer, Constants.IndexerConstants.indexVeloREV));
         runIndexREV.whileFalse(new RunIndexer(s_Indexer, 0));
+
+        highSpeed.whileTrue(new InstantCommand(() -> speedVal=0.5));
+        lowSpeed.whileTrue(new InstantCommand(() -> speedVal=0.25));
     
     }
 
@@ -146,7 +154,7 @@ public class RobotContainer {
         return new SequentialCommandGroup(
                     new ShootSpeaker(s_Shooter,Constants.ShooterConstants.combined_shooterVelo),
                     new WaitCommand(1),
-                    new StopShooter(s_Shooter,Constants.ShooterConstants.combined_shooterVelo));
+                    new StopShooter(s_Shooter));
     }
 
     public Command RunIndex(){
