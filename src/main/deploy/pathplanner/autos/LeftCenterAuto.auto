@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.38,
-      "y": 5.52
+      "x": 0.74,
+      "y": 4.36
     },
-    "rotation": 0
+    "rotation": -61.5
   },
   "command": {
     "type": "sequential",
@@ -20,7 +20,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "B1"
+            "pathName": "Left-To-Center"
           }
         },
         {
@@ -32,7 +32,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "1B"
+            "pathName": "CenterToLeft"
           }
         },
         {

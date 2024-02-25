@@ -86,8 +86,8 @@ public class RobotContainer {
             )
         );
 
-    NamedCommands.registerCommand("ShootSpeaker", ShootSpeaker());
-    NamedCommands.registerCommand("RunIndex", RunIndex());
+    NamedCommands.registerCommand("ShootSpeaker",new ShootSpeaker(s_Shooter,Constants.ShooterConstants.combined_shooterVelo));;
+    NamedCommands.registerCommand("RunIndex", new RunIndexer(s_Indexer,Constants.IndexerConstants.IndexVeloFWD));;
     NamedCommands.registerCommand("StopIndex", StopIndex());
 
     autoChooser = AutoBuilder.buildAutoChooser();
@@ -104,6 +104,7 @@ public class RobotContainer {
         SmartDashboard.putData("Right Auto",new PathPlannerAuto("Shoot-Pick-Shoot-Auto"));
         SmartDashboard.putData("Middle Auto",new PathPlannerAuto("MiddleAuto"));
         SmartDashboard.putData("Left Auto",new PathPlannerAuto("LeftAuto"));
+        SmartDashboard.putData("Left Center Auto",new PathPlannerAuto("LeftCenterAuto"));
     }
     /**
      * Use this method to define your button->command mappings. Buttons can be created by
