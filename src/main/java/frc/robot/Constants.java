@@ -194,4 +194,15 @@ public final class Constants {
         public static final int kMaxOutput = 1;
         public static final int kMinOutput = -1;
     }
+
+    public static final class speedModifierConstants {
+        public static final double HSstrafeMultiplier = 1;
+        public static final double HStranslationMultiplier =1;
+        public static final double HSrotateMultiplier = 0.5;
+    
+        public static final double LSstrafeMultiplier = 0.5;
+        public static final double LStranslationMultiplier = 0.5;
+        public static final double LSrotateMultiplier = 0.5;
+    }
+
 }
