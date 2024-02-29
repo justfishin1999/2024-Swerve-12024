@@ -52,6 +52,8 @@ public class Swerve extends SubsystemBase {
         }
         }).start();
 
+        swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
+
         AutoBuilder.configureHolonomic(
             this::getPose, // Robot pose supplier
             this::resetPose, // Method to reset odometry (will be called if your auto has a starting pose)
@@ -76,9 +78,8 @@ public class Swerve extends SubsystemBase {
               return false;
             },
             this // Reference to this subsystem to set requirements
-    );
+        );
 
-        swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
     }
 
         
