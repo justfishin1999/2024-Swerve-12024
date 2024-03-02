@@ -2,6 +2,10 @@ package frc.robot;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
+import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
+import com.pathplanner.lib.util.PIDConstants;
+import com.pathplanner.lib.util.ReplanningConfig;
+
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -23,6 +27,7 @@ public final class Constants {
         public static final double trackWidth = Units.inchesToMeters(20.5); //TODO: This must be tuned to specific robot
         public static final double wheelBase = Units.inchesToMeters(20.5); //TODO: This must be tuned to specific robot
         public static final double wheelCircumference = chosenModule.wheelCircumference;
+        public static final double radiusMeters = Units.inchesToMeters(14.6);
 
         /* Swerve Kinematics 
          * No need to ever change this unless you are not doing a traditional rectangular/square 4 module swerve */
@@ -152,6 +157,13 @@ public final class Constants {
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
             new TrapezoidProfile.Constraints(
                 kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
+
+        public static final HolonomicPathFollowerConfig autoBuilderPathConfig = new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
+        new PIDConstants(5.0, 0.0 ,0.2), 
+        new PIDConstants(5.0, 0.0, 0.0),
+        Swerve.maxSpeed, // Max module speed, in m/s
+        Swerve.radiusMeters, // Drive base radius in meters. Distance from robot center to furthest module.
+        new ReplanningConfig());
     }
 
     public static final class ShooterConstants {
@@ -165,8 +177,8 @@ public final class Constants {
         public static final int bottom_shooterVelo = -2400;
         public static final int combined_shooterVelo = -4250;
         public static final int rev_shooterVelo = -800;
-
     }
+
     public static final class IndexerConstants {
         public static final int topIndexMotorID = 10;
         public static final double index_P = 6e-5;
@@ -187,7 +199,6 @@ public final class Constants {
         public static final double climber_D = 0.0;
         public static final double climber_FF = 0.00015;
         public static final int climberVelo = 3500;
-
     }
 
     public static final class minMaxOutputConstants {
@@ -201,10 +212,8 @@ public final class Constants {
         public static final double HSstrafeMultiplier = 1;
         public static final double HStranslationMultiplier =1;
         public static final double HSrotateMultiplier = 0.5;
-    
         public static final double LSstrafeMultiplier = 0.5;
         public static final double LStranslationMultiplier = 0.5;
         public static final double LSrotateMultiplier = 0.5;
     }
-
 }
